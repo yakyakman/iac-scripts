@@ -13,7 +13,7 @@ class Plugin {
 	use PluginCoreStaticWrapper;
 
 	public static function init( $plugin_core ) {
-		self::set_plugin_core( $plugin_core );
+		self::set_plugin_core( $plugin_core, [ 'update_checker' => true ] );
 
 		Slick::init();
 		Swiper::init();

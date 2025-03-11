@@ -4,6 +4,7 @@
  * Description: Register various 3rd-party JavaScript libraries used by IAC theme and plugins.
  * Version: 1.0-alpha
  * Author: abuyoyo
+ * Update URI: https://github.com/yakyakman/facebook-gallery
  */
 
 // vendor/autoload
