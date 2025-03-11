@@ -1,0 +1,9 @@
+{
+	"dependencies": {
+		"swiper": "^4.2.0",
+		"slick-carousel": "1.8.0"
+	},
+	"scripts": {
+		"build": "yarn --modules-folder scripts"
+	}
+}
