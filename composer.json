@@ -1,0 +1,7 @@
+{
+	"require": {
+		"abuyoyo/plugincore": "~0.33",
+		"abuyoyo/wphelper-utility": "~0.13"
+	},
+	"prepend-autoloader" : false
+}
