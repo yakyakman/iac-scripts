@@ -33,9 +33,11 @@ class Slick {
 	 * @since 1.0
 	 */
 	public static function wp_register_scripts() {
+
+		// Always use .min.js file. Non-minified version breaks all our widgets.
 		wp_register_script(
 			self::$lib,
-			Plugin::scripts_url( self::$lib . '/' . self::$file_path . self::$file_name ),
+			Plugin::scripts_url( self::$lib . '/' . self::$file_path . self::$file_name_min ),
 			self::$deps,
 			null,
 			true
