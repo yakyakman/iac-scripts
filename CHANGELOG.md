@@ -2,6 +2,14 @@
 
 All notable changes to IAC Scripts plugin since version 1.0
 
+## [1.0.2](https://github.com/yakyakman/iac-scripts/releases/tag/1.0.2/) - Initial Release
+
+Release Date: 13 Mar 2025
+
+### Fixed
+-  Swiper - fix `swiper `script and style registration.
+
+
 ## [1.0.1](https://github.com/yakyakman/iac-scripts/releases/tag/1.0.1/) - Initial Release
 
 Release Date: 12 Mar 2025
