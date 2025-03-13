@@ -42,8 +42,8 @@ class Swiper {
 			self::$lib,
 			Plugin::scripts_url( self::$lib . '/' . self::$js_file_path . self::$js_file_name ),
 			self::$deps,
-			null,
-			true
+			Plugin::cache_buster(),
+			false
 		);
 	}
 
@@ -58,8 +58,7 @@ class Swiper {
 			self::$lib,
 			Plugin::scripts_url( self::$lib . '/' . self::$css_file_path . self::$css_file_name ),
 			[],
-			null,
-			true
+			Plugin::cache_buster()
 		);
 	}
 }
