@@ -2,6 +2,14 @@
 
 All notable changes to IAC Scripts plugin since version 1.0
 
+## [1.2](https://github.com/yakyakman/iac-scripts/releases/tag/1.2/)
+
+Release Date: 17 Mar 2025
+
+### Libraries
+- Showdown `showdown` (^2.1.0) - register script on admin.
+
+
 ## [1.1.1](https://github.com/yakyakman/iac-scripts/releases/tag/1.1.1/)
 
 Release Date: 17 Mar 2025

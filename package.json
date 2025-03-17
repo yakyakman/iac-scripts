@@ -1,7 +1,8 @@
 {
 	"dependencies": {
 		"swiper": "abuyoyo/swiper#4.2.0-abuyoyo",
-		"slick-carousel": "1.8.0"
+		"slick-carousel": "1.8.0",
+		"showdown": "2.1.0"
 	},
 	"scripts": {
 		"build": "yarn --modules-folder scripts"
