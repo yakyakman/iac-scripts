@@ -14,6 +14,11 @@ dom7@^2.0.3:
   dependencies:
     ssr-window "^2.0.0"
 
+jquery-validation@^1.21.0:
+  version "1.21.0"
+  resolved "https://registry.yarnpkg.com/jquery-validation/-/jquery-validation-1.21.0.tgz#78fc05ab76020912a246af3661b3f54a438bca93"
+  integrity sha512-xNot0rlUIgu7duMcQ5qb6MGkGL/Z1PQaRJQoZAURW9+a/2PGOUxY36o/WyNeP2T9R6jvWB8Z9lUVvvQWI/Zs5w==
+
 showdown@2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/showdown/-/showdown-2.1.0.tgz#1251f5ed8f773f0c0c7bfc8e6fd23581f9e545c5"
