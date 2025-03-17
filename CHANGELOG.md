@@ -2,6 +2,14 @@
 
 All notable changes to IAC Scripts plugin since version 1.0
 
+## [1.1.1](https://github.com/yakyakman/iac-scripts/releases/tag/1.1.1/)
+
+Release Date: 17 Mar 2025
+
+### Fixed
+-  Update URI plugin header points to correct repo `iac-scripts`.
+
+
 ## [1.1](https://github.com/yakyakman/iac-scripts/releases/tag/1.1/)
 
 Release Date: 17 Mar 2025
