@@ -1,135 +1,21 @@
 # Change Log
 
-## [Swiper 4.5.1](https://github.com/nolimits4web/swiper/compare/v4.5.0...v4.5.1) - Released on September 13, 2019
+## [Swiper 4.2.0-abuyoyo.0.2](https://github.com/abuyoyo/swiper/releases/tags/v4.2.0-abuyoyo.0.2)
   * Core
-    * Fixed issue when callbacks fires on init even if it disabled (#2807)
-    * Fixed issue when "swiper-slide-visible" class name in some situations shows up when it shouldn't
-    * `slidesPerColumFill: 'row'` now considers groups (#3077)
-  * Thumbs
-    * Fixes bug 'Cannot read property `indexOf` of undefined' that sometimes occurs on use of thumbnails
-  * Keyboard
-    * Added `PageUp`/`PageDown` keybindings.
-  * Autoplay
-    * Fixed issue when window resize stopped autoplay
-  * Parallax
-    * Fixed issue when parallax opacity didn't work (#3147)
-  * Minor fixes and improvements
+    * Always allow sliding and mousewheel swipe when animating.
+  * Package
+    * Re-package and re-compile distribution.
 
-## [Swiper 4.5.0](https://github.com/nolimits4web/swiper/compare/v4.4.5...v4.5.0) - Released on February 22, 2019
+## [Swiper 4.2.0-abuyoyo.0.1](https://github.com/abuyoyo/swiper/releases/tags/v4.2.0-abuyoyo.0.1)
   * Core
-    * New `swiper.changeDirection()` method to change direction from horizontal to vertical (and back) dynamically
-    * `direction` parameter can be used in breakpoints
-  * Virtual Slides
-    * `swiper.virtual.appendSlide` now accepts array of slides to add
-    * `swiper.virtual.prependSlide` now accepts array of slides to prepend
-    * New `swiper.virtual.removeSlide(indexes)` to remove virtual selected slides
-    * New `swiper.virtual.removeAllSlides()` to remove all virtual slides
-  * Navigation
-    * Now it emits `navigationHide` and `navigationShow` events when on nav hide/show
-  * Pagination
-    * Now it emits `paginationHide` and `paginationShow` events when on pagination hide/show
-  * Dom7 updated to latest 2.1.3
-    * Fixed issue when `.once` bound event could still be there after unbinding it with `.off`
-  * Source
-    * Source styles are now available in SCSS in addition to LESS
-  * Minor fixes and improvements
-
-## [Swiper 4.4.6](https://github.com/nolimits4web/swiper/compare/v4.4.5...v4.4.6) - Released on December 19, 2018
-  * Core
-    * Fixed issue with wrong slide size calculation in some cases
-
-## [Swiper 4.4.5](https://github.com/nolimits4web/swiper/compare/v4.4.2...v4.4.5) - Released on December 14, 2018
-  * Core
-    * New `observeSlideChildren` parameter to enable auto update on slide children update
-    * Fixed issue when slide padding was not considered when calculating sizes
-    * Fixed issue with wrong touch support detection on Windows Chrome
-    * Fixed some issues with wrong slides grid calculation in multi row mode
-  * Zoom
-    * Now it emits `zoomChange` event with `scale`, `imageEl` and `slideEl` arguments
-  * Minor fixes
-
-## [Swiper 4.4.2](https://github.com/nolimits4web/swiper/compare/v4.4.1...v4.4.2) - Released on November 1, 2018
-  * New `touchStartForcePreventDefault` parameter to force touch start event prevent default
-  * Breakpoints fix when breakpoint keys are strings
-  * Fixed issue when draggable scrollbar may not work on desktop Safari
-  * Fixed issue with wrong sort of Virtual Slides
-  * Minor fixes
-
-## [Swiper 4.4.1](https://github.com/nolimits4web/swiper/compare/v4.4.0...v4.4.1) - Released on September 14, 2018
-  * Fixed issue with preventing touchstart event
-
-## [Swiper 4.4.0](https://github.com/nolimits4web/swiper/compare/v4.3.5...v4.4.0) - Released on September 14, 2018
-  * Core
-    * New `centerInsufficientSlides` parameter to center slides if the amount of slides less than `slidesPerView`
-    * New `breakpointsInverse` parameter (boolean), if enabled then it will count breakpoints in reversed direction, e.g. will override parameters if window width is more than specified breakpoint
-  * Virtual Slides
-    * New `addSlidesBefore` and `addSlidesAfter` parameters to increase amount of pre-rendered slides
-  * Thumbs
-    * All new "Thumbs" module/component designed to control slider thumbnails, in more logical and correct way than with Controller module.
-  * Lots of minor fixes
-
-## [Swiper 4.3.5](https://github.com/nolimits4web/swiper/compare/v4.3.3...v4.3.5) - Released on July 31, 2018
-  * Core
-    * `iOSEdgeSwipeThreshold` parameter renamed to just `edgeSwipeThreshold`. Old `iOSEdgeSwipeThreshold` name is still supported
-    * Improved observer performance if there are many mutations at a time. Thanks to @rayvincent-bsd
-  * Controller
-    * Fixed issue with wrong auto height resizing
-  * Scrollbar
-    * Fixed issue when it was using active event listeners instead of passive. Thanks to @nyon
-  * Minor fixes
-
-## [Swiper 4.3.3](https://github.com/nolimits4web/swiper/compare/v4.3.2...v4.3.3) - Released on June 5, 2018
-  * Core
-    * Fixed issue when slidePrev goes to wrong slide #2650
-    * Fixed issue when roundLength was not considered for grids calculation #2656
-    * Fixed typo in API #2659
-
-## [Swiper 4.3.2](https://github.com/nolimits4web/swiper/compare/v4.3.0...v4.3.2) - Released on June 1, 2018
-  * Core
-    * Added `addSlide(index, slide)` method to add slide at required position. Thanks to @kochizufan
-    * Fixed issue with loop #2647. Thanks to @kochizufan
-  * Pagination
-    * New `formatFractionCurrent(number)` parameter to format current number in Fraction pagination
-    * New `formatFractionTotal(number)` parameter to format total number in Fraction pagination
-  * Minor fixes
-
-## [Swiper 4.3.0](https://github.com/nolimits4web/swiper/compare/v4.2.6...v4.3.0) - Released on May 27, 2018
-  * Core
-    * Fixed issue when `swipeBack` sometimes slides to wrong slide
-    * Fixed issue when window resizing can break Coverflow effect layout
-    * Fixed issue with wrong detection of `iOSEdgeSwipeDetection`.  Thanks to @langjun
-  * Dom7 update to latest v2.0.6:
-    * Fixed issue with remove event listeners when they was not added
-  * Minor fixes
-
-## [Swiper 4.2.6](https://github.com/nolimits4web/swiper/compare/v4.2.5...v4.2.6) - Released on May 1, 2018
-  * `console.log` cleanup
-
-## [Swiper 4.2.5](https://github.com/nolimits4web/swiper/compare/v4.2.2...v4.2.5) - Released on April 29, 2018
-  * Core
-    * Prevent apply grab cursor when swiper is locked
-    * Fixed breakpoint with loop getting wrong realIndex when on init
-    * Fixed "transformed" slides sizes calculation that could cause issues in with Coverflow effect
-  * Autoplay
-    * Fixed issue that can cause memory leak
-  * Dom7 update to latest
-    *Imporved internal events proxies logic for better memory management
-  * Minor fixes
-
-## [Swiper 4.2.2](https://github.com/nolimits4web/swiper/compare/v4.2.0...v4.2.2) - Released on April 1, 2018
-  * Core
-    * Respect and update breakpoints when calling Swiper's `.update()` method
-  * Pagination
-    * New `progressbarOpposite` parameter to make pagination progressbar opposite to `direction` parameter, means vertical progressbar for horizontal swiper direction and horizontal progressbar for vertical swiper direction
-  * Mousewheel
-    * Fixed issue in `loop` + `freeMode` for loop not being set correctly
-  * Minor fixes
+    * Always allow sliding and mousewheel swipe when animating.
+  * Dist
+    * This distribution only changes `dist/swiper.js` directly. Not compiled.
 
 ## [Swiper 4.2.0](https://github.com/nolimits4web/swiper/compare/v4.1.6...v4.2.0) - Released on March 16, 2018
   * Core
-    * `swiper.updateAutoHeight(speed)` now supports `speed` parameter to resize swiper wrapper with duration
+    * `updateAutoHeight(speed)` now supports `speed` parameter to resize swiper wrapper with duration
     * Fixed issues in free mode with `freeModeSticky` not being able to snap to closest snap point
-    * New `swiper.slideToClosest()` method to slide to closest snap point when it is somewhere in between
   * A11y (Accessibility)
     * It is now enabled by default (if installed)
   * Controller
@@ -273,7 +159,7 @@
   * New `hashnavWatchState` parameter to navigate through slides (when hashnav is enabled) by browser history or by setting directly hash on document location
   * New `replaceState` parameter that work in addition to hashnav or history to replace current url state with the new one instead of adding it to history
   * New methods `s.unsetGrabCursor()` and `s.setGrabCursor()` to enable/disable grab cursor
-  * Draggable Scrollbar now works when `simulateTouch:false `
+  * Draggable Scrollbar now works when `simulateTouch:false`
   * New `normalizeSlideIndex` parameter to improve work of controller (see #1766)
   * `lazyLoadingInPrevNextAmount` now works with `slidesPerView: 'auto'`
   * New `passiveListeners` parameter to use passive event listeners to improve scrolling performance on mobile devices. Enabled by default

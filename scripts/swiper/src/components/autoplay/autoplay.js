@@ -1,4 +1,3 @@
-/* eslint no-underscore-dangle: "off" */
 import Utils from '../../utils/utils';
 
 const Autoplay = {
@@ -9,7 +8,6 @@ const Autoplay = {
     if ($activeSlideEl.attr('data-swiper-autoplay')) {
       delay = $activeSlideEl.attr('data-swiper-autoplay') || swiper.params.autoplay.delay;
     }
-    clearTimeout(swiper.autoplay.timeout);
     swiper.autoplay.timeout = Utils.nextTick(() => {
       if (swiper.params.autoplay.reverseDirection) {
         if (swiper.params.loop) {
@@ -72,8 +70,15 @@ const Autoplay = {
       swiper.autoplay.paused = false;
       swiper.autoplay.run();
     } else {
-      swiper.$wrapperEl[0].addEventListener('transitionend', swiper.autoplay.onTransitionEnd);
-      swiper.$wrapperEl[0].addEventListener('webkitTransitionEnd', swiper.autoplay.onTransitionEnd);
+      swiper.$wrapperEl.transitionEnd(() => {
+        if (!swiper || swiper.destroyed) return;
+        swiper.autoplay.paused = false;
+        if (!swiper.autoplay.running) {
+          swiper.autoplay.stop();
+        } else {
+          swiper.autoplay.run();
+        }
+      });
     }
   },
 };
@@ -100,18 +105,6 @@ export default {
         start: Autoplay.start.bind(swiper),
         stop: Autoplay.stop.bind(swiper),
         pause: Autoplay.pause.bind(swiper),
-        onTransitionEnd(e) {
-          if (!swiper || swiper.destroyed || !swiper.$wrapperEl) return;
-          if (e.target !== this) return;
-          swiper.$wrapperEl[0].removeEventListener('transitionend', swiper.autoplay.onTransitionEnd);
-          swiper.$wrapperEl[0].removeEventListener('webkitTransitionEnd', swiper.autoplay.onTransitionEnd);
-          swiper.autoplay.paused = false;
-          if (!swiper.autoplay.running) {
-            swiper.autoplay.stop();
-          } else {
-            swiper.autoplay.run();
-          }
-        },
       },
     });
   },

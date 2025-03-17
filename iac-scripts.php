@@ -2,8 +2,8 @@
 /**
  * Plugin Name: IAC Scripts
  * Description: Register various 3rd-party JavaScript libraries used by IAC theme and plugins.
- * Version: 1.0.2
- * Release Date: 13-03-2025
+ * Version: 1.1
+ * Release Date: 17-03-2025
  * Author: abuyoyo
  * Update URI: https://github.com/yakyakman/facebook-gallery
  */

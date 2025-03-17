@@ -1,6 +1,6 @@
 {
 	"dependencies": {
-		"swiper": "^4.2.0",
+		"swiper": "abuyoyo/swiper#4.2.0-abuyoyo",
 		"slick-carousel": "1.8.0"
 	},
 	"scripts": {

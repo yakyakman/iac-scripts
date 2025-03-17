@@ -53,7 +53,7 @@ function attachEvents() {
   }
 
   // Resize handler
-  swiper.on((Device.ios || Device.android ? 'resize orientationchange observerUpdate' : 'resize observerUpdate'), onResize, true);
+  swiper.on('resize observerUpdate', onResize, true);
 }
 
 function detachEvents() {
@@ -94,7 +94,7 @@ function detachEvents() {
   }
 
   // Resize handler
-  swiper.off((Device.ios || Device.android ? 'resize orientationchange observerUpdate' : 'resize observerUpdate'), onResize);
+  swiper.off('resize observerUpdate', onResize);
 }
 
 export default {

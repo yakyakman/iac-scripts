@@ -1,7 +1,6 @@
 import { window } from 'ssr-window';
 import Utils from '../../../utils/utils';
 import Support from '../../../utils/support';
-import Browser from '../../../utils/browser';
 
 export default function () {
   const swiper = this;
@@ -10,9 +9,8 @@ export default function () {
   const {
     $wrapperEl, size: swiperSize, rtlTranslate: rtl, wrongRTL,
   } = swiper;
-  const isVirtual = swiper.virtual && params.virtual.enabled;
-  const previousSlidesLength = isVirtual ? swiper.virtual.slides.length : swiper.slides.length;
   const slides = $wrapperEl.children(`.${swiper.params.slideClass}`);
+  const isVirtual = swiper.virtual && params.virtual.enabled;
   const slidesLength = isVirtual ? swiper.virtual.slides.length : slides.length;
   let snapGrid = [];
   const slidesGrid = [];
@@ -28,6 +26,7 @@ export default function () {
     offsetAfter = params.slidesOffsetAfter.call(swiper);
   }
 
+  const previousSlidesLength = slidesLength;
   const previousSnapGridLength = swiper.snapGrid.length;
   const previousSlidesGridLength = swiper.snapGrid.length;
 
@@ -64,7 +63,7 @@ export default function () {
   let slideSize;
   const slidesPerColumn = params.slidesPerColumn;
   const slidesPerRow = slidesNumberEvenToRows / slidesPerColumn;
-  const numFullColumns = Math.floor(slidesLength / params.slidesPerColumn);
+  const numFullColumns = slidesPerRow - ((params.slidesPerColumn * slidesPerRow) - slidesLength);
   for (let i = 0; i < slidesLength; i += 1) {
     slideSize = 0;
     const slide = slides.eq(i);
@@ -73,24 +72,15 @@ export default function () {
       let newSlideOrderIndex;
       let column;
       let row;
-      if (
-        (params.slidesPerColumnFill === 'column')
-        || (params.slidesPerColumnFill === 'row' && params.slidesPerGroup > 1)
-      ) {
-        if (params.slidesPerColumnFill === 'column') {
-          column = Math.floor(i / slidesPerColumn);
-          row = i - (column * slidesPerColumn);
-          if (column > numFullColumns || (column === numFullColumns && row === slidesPerColumn - 1)) {
-            row += 1;
-            if (row >= slidesPerColumn) {
-              row = 0;
-              column += 1;
-            }
+      if (params.slidesPerColumnFill === 'column') {
+        column = Math.floor(i / slidesPerColumn);
+        row = i - (column * slidesPerColumn);
+        if (column > numFullColumns || (column === numFullColumns && row === slidesPerColumn - 1)) {
+          row += 1;
+          if (row >= slidesPerColumn) {
+            row = 0;
+            column += 1;
           }
-        } else {
-          const groupIndex = Math.floor(i / params.slidesPerGroup);
-          row = Math.floor(i / params.slidesPerView) - groupIndex * params.slidesPerColumn;
-          column = i - row * params.slidesPerView - groupIndex * params.slidesPerView;
         }
         newSlideOrderIndex = column + ((row * slidesNumberEvenToRows) / slidesPerColumn);
         slide
@@ -117,51 +107,14 @@ export default function () {
 
     if (params.slidesPerView === 'auto') {
       const slideStyles = window.getComputedStyle(slide[0], null);
-      const currentTransform = slide[0].style.transform;
-      const currentWebKitTransform = slide[0].style.webkitTransform;
-      if (currentTransform) {
-        slide[0].style.transform = 'none';
-      }
-      if (currentWebKitTransform) {
-        slide[0].style.webkitTransform = 'none';
-      }
-      if (params.roundLengths) {
-        slideSize = swiper.isHorizontal()
-          ? slide.outerWidth(true)
-          : slide.outerHeight(true);
+      if (swiper.isHorizontal()) {
+        slideSize = slide[0].getBoundingClientRect().width +
+          parseFloat(slideStyles.getPropertyValue('margin-left')) +
+          parseFloat(slideStyles.getPropertyValue('margin-right'));
       } else {
-        // eslint-disable-next-line
-        if (swiper.isHorizontal()) {
-          const width = parseFloat(slideStyles.getPropertyValue('width'));
-          const paddingLeft = parseFloat(slideStyles.getPropertyValue('padding-left'));
-          const paddingRight = parseFloat(slideStyles.getPropertyValue('padding-right'));
-          const marginLeft = parseFloat(slideStyles.getPropertyValue('margin-left'));
-          const marginRight = parseFloat(slideStyles.getPropertyValue('margin-right'));
-          const boxSizing = slideStyles.getPropertyValue('box-sizing');
-          if (boxSizing && boxSizing === 'border-box' && !Browser.isIE) {
-            slideSize = width + marginLeft + marginRight;
-          } else {
-            slideSize = width + paddingLeft + paddingRight + marginLeft + marginRight;
-          }
-        } else {
-          const height = parseFloat(slideStyles.getPropertyValue('height'));
-          const paddingTop = parseFloat(slideStyles.getPropertyValue('padding-top'));
-          const paddingBottom = parseFloat(slideStyles.getPropertyValue('padding-bottom'));
-          const marginTop = parseFloat(slideStyles.getPropertyValue('margin-top'));
-          const marginBottom = parseFloat(slideStyles.getPropertyValue('margin-bottom'));
-          const boxSizing = slideStyles.getPropertyValue('box-sizing');
-          if (boxSizing && boxSizing === 'border-box' && !Browser.isIE) {
-            slideSize = height + marginTop + marginBottom;
-          } else {
-            slideSize = height + paddingTop + paddingBottom + marginTop + marginBottom;
-          }
-        }
-      }
-      if (currentTransform) {
-        slide[0].style.transform = currentTransform;
-      }
-      if (currentWebKitTransform) {
-        slide[0].style.webkitTransform = currentWebKitTransform;
+        slideSize = slide[0].getBoundingClientRect().height +
+          parseFloat(slideStyles.getPropertyValue('margin-top')) +
+          parseFloat(slideStyles.getPropertyValue('margin-bottom'));
       }
       if (params.roundLengths) slideSize = Math.floor(slideSize);
     } else {
@@ -187,11 +140,9 @@ export default function () {
       if (prevSlideSize === 0 && i !== 0) slidePosition = slidePosition - (swiperSize / 2) - spaceBetween;
       if (i === 0) slidePosition = slidePosition - (swiperSize / 2) - spaceBetween;
       if (Math.abs(slidePosition) < 1 / 1000) slidePosition = 0;
-      if (params.roundLengths) slidePosition = Math.floor(slidePosition);
       if ((index) % params.slidesPerGroup === 0) snapGrid.push(slidePosition);
       slidesGrid.push(slidePosition);
     } else {
-      if (params.roundLengths) slidePosition = Math.floor(slidePosition);
       if ((index) % params.slidesPerGroup === 0) snapGrid.push(slidePosition);
       slidesGrid.push(slidePosition);
       slidePosition = slidePosition + slideSize + spaceBetween;
@@ -223,9 +174,7 @@ export default function () {
     if (params.centeredSlides) {
       newSlidesGrid = [];
       for (let i = 0; i < snapGrid.length; i += 1) {
-        let slidesGridItem = snapGrid[i];
-        if (params.roundLengths) slidesGridItem = Math.floor(slidesGridItem);
-        if (snapGrid[i] < swiper.virtualSize + snapGrid[0]) newSlidesGrid.push(slidesGridItem);
+        if (snapGrid[i] < swiper.virtualSize + snapGrid[0]) newSlidesGrid.push(snapGrid[i]);
       }
       snapGrid = newSlidesGrid;
     }
@@ -235,10 +184,8 @@ export default function () {
   if (!params.centeredSlides) {
     newSlidesGrid = [];
     for (let i = 0; i < snapGrid.length; i += 1) {
-      let slidesGridItem = snapGrid[i];
-      if (params.roundLengths) slidesGridItem = Math.floor(slidesGridItem);
       if (snapGrid[i] <= swiper.virtualSize - swiperSize) {
-        newSlidesGrid.push(slidesGridItem);
+        newSlidesGrid.push(snapGrid[i]);
       }
     }
     snapGrid = newSlidesGrid;
@@ -253,23 +200,6 @@ export default function () {
       if (rtl) slides.css({ marginLeft: `${spaceBetween}px` });
       else slides.css({ marginRight: `${spaceBetween}px` });
     } else slides.css({ marginBottom: `${spaceBetween}px` });
-  }
-
-  if (params.centerInsufficientSlides) {
-    let allSlidesSize = 0;
-    slidesSizesGrid.forEach((slideSizeValue) => {
-      allSlidesSize += slideSizeValue + (params.spaceBetween ? params.spaceBetween : 0);
-    });
-    allSlidesSize -= params.spaceBetween;
-    if (allSlidesSize < swiperSize) {
-      const allSlidesOffset = (swiperSize - allSlidesSize) / 2;
-      snapGrid.forEach((snap, snapIndex) => {
-        snapGrid[snapIndex] = snap - allSlidesOffset;
-      });
-      slidesGrid.forEach((snap, snapIndex) => {
-        slidesGrid[snapIndex] = snap + allSlidesOffset;
-      });
-    }
   }
 
   Utils.extend(swiper, {

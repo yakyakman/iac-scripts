@@ -2,6 +2,14 @@
 
 All notable changes to IAC Scripts plugin since version 1.0
 
+## [1.1](https://github.com/yakyakman/iac-scripts/releases/tag/1.1/)
+
+Release Date: 17 Mar 2025
+
+### Changed
+-  Swiper - use customized `4.2.0-abuyoyo.0.2` library from GitHub `abuyoyo/swiper` fork.
+
+
 ## [1.0.2](https://github.com/yakyakman/iac-scripts/releases/tag/1.0.2/) - Initial Release
 
 Release Date: 13 Mar 2025

@@ -3,7 +3,7 @@ export default function (speed = this.params.speed, runCallbacks = true, interna
   const swiper = this;
   const { params, animating } = swiper;
   if (params.loop) {
-    if (animating) return false;
+    // if (animating) { return false; } //abuyoyo 16.04.2018 // if (params.waitForAnimate && animating) { return false; } // NOT params.autoplay.waitForTransition
     swiper.loopFix();
     // eslint-disable-next-line
     swiper._clientLeft = swiper.$wrapperEl[0].clientLeft;

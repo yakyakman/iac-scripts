@@ -9,22 +9,9 @@ const Observer = {
 
     const ObserverFunc = Observer.func;
     const observer = new ObserverFunc((mutations) => {
-      // The observerUpdate event should only be triggered
-      // once despite the number of mutations.  Additional
-      // triggers are redundant and are very costly
-      if (mutations.length === 1) {
-        swiper.emit('observerUpdate', mutations[0]);
-        return;
-      }
-      const observerUpdate = function observerUpdate() {
-        swiper.emit('observerUpdate', mutations[0]);
-      };
-
-      if (window.requestAnimationFrame) {
-        window.requestAnimationFrame(observerUpdate);
-      } else {
-        window.setTimeout(observerUpdate, 0);
-      }
+      mutations.forEach((mutation) => {
+        swiper.emit('observerUpdate', mutation);
+      });
     });
 
     observer.observe(target, {
@@ -45,7 +32,7 @@ const Observer = {
       }
     }
     // Observe container
-    swiper.observer.attach(swiper.$el[0], { childList: swiper.params.observeSlideChildren });
+    swiper.observer.attach(swiper.$el[0], { childList: false });
 
     // Observe wrapper
     swiper.observer.attach(swiper.$wrapperEl[0], { attributes: false });
@@ -64,7 +51,6 @@ export default {
   params: {
     observer: false,
     observeParents: false,
-    observeSlideChildren: false,
   },
   create() {
     const swiper = this;
