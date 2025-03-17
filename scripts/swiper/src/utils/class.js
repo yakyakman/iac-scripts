@@ -14,7 +14,6 @@ class SwiperClass {
       });
     }
   }
-
   on(events, handler, priority) {
     const self = this;
     if (typeof handler !== 'function') return self;
@@ -25,30 +24,23 @@ class SwiperClass {
     });
     return self;
   }
-
   once(events, handler, priority) {
     const self = this;
     if (typeof handler !== 'function') return self;
     function onceHandler(...args) {
       handler.apply(self, args);
       self.off(events, onceHandler);
-      if (onceHandler.f7proxy) {
-        delete onceHandler.f7proxy;
-      }
     }
-    onceHandler.f7proxy = handler;
     return self.on(events, onceHandler, priority);
   }
-
   off(events, handler) {
     const self = this;
-    if (!self.eventsListeners) return self;
     events.split(' ').forEach((event) => {
       if (typeof handler === 'undefined') {
         self.eventsListeners[event] = [];
-      } else if (self.eventsListeners[event] && self.eventsListeners[event].length) {
+      } else {
         self.eventsListeners[event].forEach((eventHandler, index) => {
-          if (eventHandler === handler || (eventHandler.f7proxy && eventHandler.f7proxy === handler)) {
+          if (eventHandler === handler) {
             self.eventsListeners[event].splice(index, 1);
           }
         });
@@ -56,7 +48,6 @@ class SwiperClass {
     });
     return self;
   }
-
   emit(...args) {
     const self = this;
     if (!self.eventsListeners) return self;
@@ -74,7 +65,7 @@ class SwiperClass {
     }
     const eventsArray = Array.isArray(events) ? events : events.split(' ');
     eventsArray.forEach((event) => {
-      if (self.eventsListeners && self.eventsListeners[event]) {
+      if (self.eventsListeners[event]) {
         const handlers = [];
         self.eventsListeners[event].forEach((eventHandler) => {
           handlers.push(eventHandler);
@@ -86,7 +77,6 @@ class SwiperClass {
     });
     return self;
   }
-
   useModulesParams(instanceParams) {
     const instance = this;
     if (!instance.modules) return;
@@ -98,7 +88,6 @@ class SwiperClass {
       }
     });
   }
-
   useModules(modulesParams = {}) {
     const instance = this;
     if (!instance.modules) return;
@@ -129,13 +118,11 @@ class SwiperClass {
       }
     });
   }
-
   static set components(components) {
     const Class = this;
     if (!Class.use) return;
     Class.use(components);
   }
-
   static installModule(module, ...params) {
     const Class = this;
     if (!Class.prototype.modules) Class.prototype.modules = {};
@@ -159,11 +146,10 @@ class SwiperClass {
     }
     return Class;
   }
-
   static use(module, ...params) {
     const Class = this;
     if (Array.isArray(module)) {
-      module.forEach((m) => Class.installModule(m));
+      module.forEach(m => Class.installModule(m));
       return Class;
     }
     return Class.installModule(module, ...params);

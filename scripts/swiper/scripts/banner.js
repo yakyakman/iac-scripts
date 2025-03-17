@@ -1,5 +1,7 @@
 const pkg = require('../package.json');
 
+const abuyoyo_version = require('../abuyoyo');
+
 const date = {
   day: new Date().getDate(),
   month: ('January February March April May June July August September October November December').split(' ')[new Date().getMonth()],
@@ -8,7 +10,7 @@ const date = {
 
 module.exports = `${`
 /**
- * Swiper ${pkg.version}
+ * Swiper ${pkg.version}-abuyoyo.${abuyoyo_version}
  * ${pkg.description}
  * ${pkg.homepage}
  *

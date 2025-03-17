@@ -11,7 +11,7 @@ export default function () {
   }
 
   // Save locks
-  const { allowSlideNext, allowSlidePrev, snapGrid } = swiper;
+  const { allowSlideNext, allowSlidePrev } = swiper;
 
   // Disable locks on resize
   swiper.allowSlideNext = true;
@@ -37,14 +37,7 @@ export default function () {
       swiper.slideTo(swiper.activeIndex, 0, false, true);
     }
   }
-  if (swiper.autoplay && swiper.autoplay.running && swiper.autoplay.paused) {
-    swiper.autoplay.run();
-  }
   // Return locks after resize
   swiper.allowSlidePrev = allowSlidePrev;
   swiper.allowSlideNext = allowSlideNext;
-
-  if (swiper.params.watchOverflow && snapGrid !== swiper.snapGrid) {
-    swiper.checkOverflow();
-  }
 }

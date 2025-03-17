@@ -1,8 +1,6 @@
-/* eslint no-param-reassign: "off" */
 import $ from '../../utils/dom';
 import Utils from '../../utils/utils';
 import Support from '../../utils/support';
-import Browser from '../../utils/browser';
 
 import SwiperClass from '../../utils/class';
 
@@ -72,14 +70,14 @@ class Swiper extends SwiperClass {
       if (module.params) {
         const moduleParamName = Object.keys(module.params)[0];
         const moduleParams = module.params[moduleParamName];
-        if (typeof moduleParams !== 'object' || moduleParams === null) return;
+        if (typeof moduleParams !== 'object') return;
         if (!(moduleParamName in params && 'enabled' in moduleParams)) return;
         if (params[moduleParamName] === true) {
           params[moduleParamName] = { enabled: true };
         }
         if (
-          typeof params[moduleParamName] === 'object'
-          && !('enabled' in params[moduleParamName])
+          typeof params[moduleParamName] === 'object' &&
+          !('enabled' in params[moduleParamName])
         ) {
           params[moduleParamName].enabled = true;
         }
@@ -160,7 +158,6 @@ class Swiper extends SwiperClass {
 
       // Props
       translate: 0,
-      previousTranslate: 0,
       progress: 0,
       velocity: 0,
       animating: false,
@@ -242,7 +239,6 @@ class Swiper extends SwiperClass {
     // Return app instance
     return swiper;
   }
-
   slidesPerViewDynamic() {
     const swiper = this;
     const {
@@ -275,15 +271,9 @@ class Swiper extends SwiperClass {
     }
     return spv;
   }
-
   update() {
     const swiper = this;
     if (!swiper || swiper.destroyed) return;
-    const { snapGrid, params } = swiper;
-    // Breakpoints
-    if (params.breakpoints) {
-      swiper.setBreakpoint();
-    }
     swiper.updateSize();
     swiper.updateSlides();
     swiper.updateProgress();
@@ -312,47 +302,8 @@ class Swiper extends SwiperClass {
         setTranslate();
       }
     }
-    if (params.watchOverflow && snapGrid !== swiper.snapGrid) {
-      swiper.checkOverflow();
-    }
     swiper.emit('update');
   }
-
-  changeDirection(newDirection, needUpdate = true) {
-    const swiper = this;
-    const currentDirection = swiper.params.direction;
-    if (!newDirection) {
-      // eslint-disable-next-line
-      newDirection = currentDirection === 'horizontal' ? 'vertical' : 'horizontal';
-    }
-    if ((newDirection === currentDirection) || (newDirection !== 'horizontal' && newDirection !== 'vertical')) {
-      return swiper;
-    }
-
-    swiper.$el
-      .removeClass(`${swiper.params.containerModifierClass}${currentDirection} wp8-${currentDirection}`)
-      .addClass(`${swiper.params.containerModifierClass}${newDirection}`);
-
-    if ((Browser.isIE || Browser.isEdge) && (Support.pointerEvents || Support.prefixedPointerEvents)) {
-      swiper.$el.addClass(`${swiper.params.containerModifierClass}wp8-${newDirection}`);
-    }
-
-    swiper.params.direction = newDirection;
-
-    swiper.slides.each((slideIndex, slideEl) => {
-      if (newDirection === 'vertical') {
-        slideEl.style.width = '';
-      } else {
-        slideEl.style.height = '';
-      }
-    });
-
-    swiper.emit('changeDirection');
-    if (needUpdate) swiper.update();
-
-    return swiper;
-  }
-
   init() {
     const swiper = this;
     if (swiper.initialized) return;
@@ -407,17 +358,11 @@ class Swiper extends SwiperClass {
     // Emit
     swiper.emit('init');
   }
-
   destroy(deleteInstance = true, cleanStyles = true) {
     const swiper = this;
     const {
       params, $el, $wrapperEl, slides,
     } = swiper;
-
-    if (typeof swiper.params === 'undefined' || swiper.destroyed) {
-      return null;
-    }
-
     swiper.emit('beforeDestroy');
 
     // Init Flag
@@ -464,26 +409,19 @@ class Swiper extends SwiperClass {
       Utils.deleteProps(swiper);
     }
     swiper.destroyed = true;
-
-    return null;
   }
-
   static extendDefaults(newDefaults) {
     Utils.extend(extendedDefaults, newDefaults);
   }
-
   static get extendedDefaults() {
     return extendedDefaults;
   }
-
   static get defaults() {
     return defaults;
   }
-
   static get Class() {
     return SwiperClass;
   }
-
   static get $() {
     return $;
   }
