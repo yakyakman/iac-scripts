@@ -5,7 +5,7 @@
  * Version: 1.1
  * Release Date: 17-03-2025
  * Author: abuyoyo
- * Update URI: https://github.com/yakyakman/facebook-gallery
+ * Update URI: https://github.com/yakyakman/iac-scripts
  */
 
 // vendor/autoload
