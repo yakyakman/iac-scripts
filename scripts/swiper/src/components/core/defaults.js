@@ -5,11 +5,11 @@ export default {
   initialSlide: 0,
   speed: 300,
   //
-  preventInteractionOnTransition: false,
+  preventIntercationOnTransition: false,
 
   // To support iOS's swipe-to-go-back gesture (when being used in-app, with UIWebView).
-  edgeSwipeDetection: false,
-  edgeSwipeThreshold: 20,
+  iOSEdgeSwipeDetection: false,
+  iOSEdgeSwipeThreshold: 20,
 
   // Free mode
   freeMode: false,
@@ -35,7 +35,6 @@ export default {
 
   // Breakpoints
   breakpoints: undefined,
-  breakpointsInverse: false,
 
   // Slides grid
   spaceBetween: 0,
@@ -47,7 +46,6 @@ export default {
   slidesOffsetBefore: 0, // in px
   slidesOffsetAfter: 0, // in px
   normalizeSlideIndex: true,
-  centerInsufficientSlides: false,
 
   // Disable swiper and hide navigation when container not overflow
   watchOverflow: false,
@@ -67,8 +65,6 @@ export default {
   allowTouchMove: true,
   threshold: 0,
   touchMoveStopPropagation: true,
-  touchStartPreventDefault: true,
-  touchStartForcePreventDefault: false,
   touchReleaseOnEdges: false,
 
   // Unique Navigation Elements

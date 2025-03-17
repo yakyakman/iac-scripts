@@ -22,19 +22,18 @@ function es(components, cb) {
   // Bundle
   rollup.rollup({
     input: './src/swiper.js',
-    external: ['dom7/dist/dom7.modular', 'ssr-window'],
+    external: ['dom7', 'ssr-window'],
     plugins: [
       replace({
         delimiters: ['', ''],
         'process.env.NODE_ENV': JSON.stringify(env),
         'process.env.TARGET': JSON.stringify(target),
-        '//IMPORT_COMPONENTS': components.map((component) => `import ${component.capitalized} from './components/${component.name}/${component.name}';`).join('\n'),
-        '//INSTALL_COMPONENTS': components.map((component) => `${component.capitalized}`).join(',\n  '),
+        '//IMPORT_COMPONENTS': components.map(component => `import ${component.capitalized} from './components/${component.name}/${component.name}';`).join('\n'),
+        '//INSTALL_COMPONENTS': components.map(component => `${component.capitalized}`).join(',\n  '),
         '//EXPORT': 'export default Swiper',
       }),
-      resolve({ jsnext: true }),
     ],
-  }).then((bundle) => bundle.write({
+  }).then(bundle => bundle.write({
     format: 'es',
     name: 'Swiper',
     strict: true,
@@ -52,19 +51,18 @@ function es(components, cb) {
   // Modular
   rollup.rollup({
     input: './src/swiper.js',
-    external: ['dom7/dist/dom7.modular', 'ssr-window'],
+    external: ['dom7', 'ssr-window'],
     plugins: [
       replace({
         delimiters: ['', ''],
         'process.env.NODE_ENV': JSON.stringify(env),
         'process.env.TARGET': JSON.stringify(target),
-        '//IMPORT_COMPONENTS': components.map((component) => `import ${component.capitalized} from './components/${component.name}/${component.name}';`).join('\n'),
+        '//IMPORT_COMPONENTS': components.map(component => `import ${component.capitalized} from './components/${component.name}/${component.name}';`).join('\n'),
         '//INSTALL_COMPONENTS': '',
-        '//EXPORT': `export { Swiper, ${components.map((component) => component.capitalized).join(', ')} }`,
+        '//EXPORT': `export { Swiper, ${components.map(component => component.capitalized).join(', ')} }`,
       }),
-      resolve({ jsnext: true }),
     ],
-  }).then((bundle) => bundle.write({
+  }).then(bundle => bundle.write({
     format: 'es',
     name: 'Swiper',
     strict: true,
@@ -90,14 +88,14 @@ function umd(components, cb) {
         delimiters: ['', ''],
         'process.env.NODE_ENV': JSON.stringify(env),
         'process.env.TARGET': JSON.stringify(target),
-        '//IMPORT_COMPONENTS': components.map((component) => `import ${component.capitalized} from './components/${component.name}/${component.name}';`).join('\n'),
-        '//INSTALL_COMPONENTS': components.map((component) => `${component.capitalized}`).join(',\n  '),
+        '//IMPORT_COMPONENTS': components.map(component => `import ${component.capitalized} from './components/${component.name}/${component.name}';`).join('\n'),
+        '//INSTALL_COMPONENTS': components.map(component => `${component.capitalized}`).join(',\n  '),
         '//EXPORT': 'export default Swiper;',
       }),
       resolve({ jsnext: true }),
       buble(),
     ],
-  }).then((bundle) => bundle.write({
+  }).then(bundle => bundle.write({
     format: 'umd',
     name: 'Swiper',
     strict: true,
