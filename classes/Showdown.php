@@ -40,8 +40,7 @@ class Showdown {
 			self::$lib,
 			Plugin::scripts_url( self::$lib . '/' . self::$js_file_path . $file_name ),
 			self::$deps,
-			Plugin::cache_buster(),
-			false
+			Plugin::cache_buster()
 		);
 	}
 }
