@@ -17,6 +17,8 @@ class Plugin {
 
 		Slick::init();
 		Swiper::init();
+
+		Showdown::init();
 	}
 
 	/**
