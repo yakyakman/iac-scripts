@@ -18,6 +18,8 @@ class Plugin {
 		Slick::init();
 		Swiper::init();
 
+		JqueryValidation::init();
+
 		Showdown::init();
 	}
 

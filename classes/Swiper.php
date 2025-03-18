@@ -23,7 +23,9 @@ class Swiper {
 
 	public static $css_file_name = 'swiper.css';
 	
-	public static $deps = [ 'jquery' ];
+	public static $js_deps = [];
+	
+	public static $css_deps = [];
 
 	/**
 	 * @since 1.0
@@ -41,9 +43,8 @@ class Swiper {
 		wp_register_script(
 			self::$lib,
 			Plugin::scripts_url( self::$lib . '/' . self::$js_file_path . self::$js_file_name ),
-			self::$deps,
-			Plugin::cache_buster(),
-			false
+			self::$js_deps,
+			Plugin::cache_buster()
 		);
 	}
 
@@ -57,7 +58,7 @@ class Swiper {
 		wp_register_style(
 			self::$lib,
 			Plugin::scripts_url( self::$lib . '/' . self::$css_file_path . self::$css_file_name ),
-			[],
+			self::$css_deps,
 			Plugin::cache_buster()
 		);
 	}

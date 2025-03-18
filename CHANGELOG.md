@@ -2,6 +2,14 @@
 
 All notable changes to IAC Scripts plugin since version 1.0
 
+## [1.3](https://github.com/yakyakman/iac-scripts/releases/tag/1.3/)
+
+Release Date: 18 Mar 2025
+
+### Libraries
+- Jquery Validation - register `jquery-validation` (^1.21.0).
+
+
 ## [1.2](https://github.com/yakyakman/iac-scripts/releases/tag/1.2/)
 
 Release Date: 17 Mar 2025
